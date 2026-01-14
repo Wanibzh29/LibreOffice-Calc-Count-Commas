@@ -1,0 +1,26 @@
+Function CountCommas(txt As String) As Long
+    Dim i As Long
+    Dim level As Long
+    Dim count As Long
+    Dim c As String
+
+    level = 0
+    count = 0
+
+    For i = 1 To Len(txt)
+        c = Mid(txt, i, 1)
+
+        ' Monter un niveau d'imbrication
+        If c = "(" Then
+            level = level + 1
+        ' Descendre un niveau
+        ElseIf c = ")" Then
+            If level > 0 Then level = level - 1
+        ' Compter virgule uniquement si niveau = 0
+        ElseIf c = "," And level = 0 Then
+            count = count + 1
+        End If
+    Next i
+
+    CountCommas = count
+End Function
